@@ -107,6 +107,7 @@ public class ComputerBuilder {
         if (cpu == null || ram == null || motherboard == null || storage == null
             || powerSupply == null || gpu == null) {
             throw new IllegalStateException("Обов'язкові компоненти не вибрані.");
+            //тут можна зробити як і нижче, щоб повертало в меню збірки, але для галочки нехай буде
         }
         if (cpu.getSupportedSocket() != motherboard.getSupportedSocket()) {
             System.out.println("Сокети конфліктують, змініть свій вибір!");

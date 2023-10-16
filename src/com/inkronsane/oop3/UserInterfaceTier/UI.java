@@ -53,10 +53,12 @@ public class UI {
                     selectComponent("відеокарту (GPU):", GPU.values());
                     break;
                 case 7:
-                    if (computerBuilder.getFinalCost() > 0) {
-                        displayOptionalComponentsMenu(scanner);
-                    } else {
+                    if (!computerBuilder.hasCPU() || !computerBuilder.hasMotherboard()
+                        || !computerBuilder.hasGPU() || !computerBuilder.hasRAM()
+                        || !computerBuilder.hasPowerSupply() || !computerBuilder.hasStorage()) {
                         System.out.println("Спершу обери основні компоненти воїне.");
+                    } else {
+                        displayOptionalComponentsMenu(scanner);
                     }
                     break;
                 case 8:
@@ -84,7 +86,7 @@ public class UI {
 
     private static void displayOptionalComponentsMenu(Scanner scanner) {
         while (true) {
-            System.out.println("Обери опціональні компоненти (або 0, щоб завершити):");
+            System.out.println("Обери опціональні компоненти:");
             displayOptionalComponents();
 
             int optionalChoice = scanner.nextInt();
@@ -125,10 +127,10 @@ public class UI {
     private static void selectComponent(String componentName, Price[] components) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Оберіть " + componentName);
+        System.out.println("0) Скасувати вибір компоненту");
         for (int i = 0; i < components.length; i++) {
             System.out.println((i + 1) + ". " + components[i].getAllCharacteristics());
         }
-        System.out.println("Натисніть 0 для повернення в меню.");
         int componentChoice = scanner.nextInt();
 
         if (componentChoice != 0 && componentChoice <= components.length) {
